@@ -43,7 +43,8 @@ namespace PackageDependencyValidator.FileParser
 						packagesToInstall.Add(package);
 					}
 
-					var dependenciesCount = _packageInformationParser.ParsePackageCount(packageCountLine);
+					var dependenciesCountLine = reader.ReadLine();
+					var dependenciesCount = _packageInformationParser.ParsePackageCount(dependenciesCountLine);
 					var packageDependencies = new Dictionary<PackageDetails, IList<PackageDetails>>();
 
 					for (var i = 0; i < dependenciesCount; i++)
