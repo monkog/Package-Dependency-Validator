@@ -85,6 +85,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Validators\DependenciesValidator.cs" />
+    <Compile Include="Validators\IDependenciesValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -96,5 +98,6 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

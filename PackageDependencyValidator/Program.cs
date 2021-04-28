@@ -1,6 +1,7 @@
 ﻿using System.IO.Abstractions;
 using Autofac;
 using PackageDependencyValidator.FileParser;
+using PackageDependencyValidator.Validators;
 
 namespace PackageDependencyValidator
 {
@@ -14,6 +15,7 @@ namespace PackageDependencyValidator
 			builder.RegisterType<PackageDependenciesFileParser>().As<IPackageDependenciesFileParser>();
 			builder.RegisterType<PackageInformationParser>().As<IPackageInformationParser>();
 			builder.RegisterType<FileSystem>().As<IFileSystem>();
+			builder.RegisterType<DependenciesValidator>().As<IDependenciesValidator>();
 			Container = builder.Build();
 		}
 	}
