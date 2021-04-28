@@ -121,6 +121,10 @@
     <value>Package name cannot be an empty string.</value>
     <comment>Displayed when the user passes an empty string as a package name.</comment>
   </data>
+  <data name="EmptyPackageVersion" xml:space="preserve">
+    <value>Package version cannot be an empty string.</value>
+    <comment>Displayed when the user passes an empty string as a package version.</comment>
+  </data>
   <data name="InvalidPackageDescription" xml:space="preserve">
     <value>Invalid package description {0}.</value>
     <comment>Displayed when the package description is not in a `package,version` format.</comment>
@@ -132,9 +136,5 @@
   <data name="InvalidPackageVersion" xml:space="preserve">
     <value>Invalid package version: {0}. The value must be 1 or higher.</value>
     <comment>Displayed when the user passes a package version that is lower than 1.</comment>
-  </data>
-  <data name="WrongPackageVersionFormat" xml:space="preserve">
-    <value>Expected and integer value that will represent the package version, but got {0} instead.</value>
-    <comment>Displayed when the user passes a non-integer value as the package version.</comment>
   </data>
 </root>

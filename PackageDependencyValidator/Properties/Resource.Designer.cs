@@ -70,6 +70,15 @@ namespace PackageDependencyValidator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Package version cannot be an empty string..
+        /// </summary>
+        internal static string EmptyPackageVersion {
+            get {
+                return ResourceManager.GetString("EmptyPackageVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid package description {0}..
         /// </summary>
         internal static string InvalidPackageDescription {
@@ -93,15 +102,6 @@ namespace PackageDependencyValidator.Properties {
         internal static string InvalidPackageVersion {
             get {
                 return ResourceManager.GetString("InvalidPackageVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expected and integer value that will represent the package version, but got {0} instead..
-        /// </summary>
-        internal static string WrongPackageVersionFormat {
-            get {
-                return ResourceManager.GetString("WrongPackageVersionFormat", resourceCulture);
             }
         }
     }

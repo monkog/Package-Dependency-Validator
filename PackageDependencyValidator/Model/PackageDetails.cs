@@ -16,22 +16,15 @@ namespace PackageDependencyValidator.Model
 		/// <summary>
 		/// Version of the package.
 		/// </summary>
-		public int Version { get; }
+		public string Version { get; }
 
 		public PackageDetails(string name, string version)
 		{
-			_ = name ?? throw new ArgumentNullException(nameof(name));
-			if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(Resource.EmptyPackageName);
+			Name = name ?? throw new ArgumentNullException(nameof(name));
+			Version = version ?? throw new ArgumentNullException(nameof(version));
 
-			if (!int.TryParse(version, out var parsedVersion))
-			{
-				throw new FormatException(string.Format(Resource.WrongPackageVersionFormat, parsedVersion));
-			}
-
-			if (parsedVersion < 1) throw new ArgumentException(string.Format(Resource.InvalidPackageVersion, version));
-
-			Name = name;
-			Version = parsedVersion;
+			if (string.IsNullOrWhiteSpace(Name)) throw new ArgumentException(Resource.EmptyPackageName);
+			if (string.IsNullOrWhiteSpace(Version)) throw new ArgumentException(Resource.EmptyPackageVersion);
 		}
 
 		public override bool Equals(object obj)
