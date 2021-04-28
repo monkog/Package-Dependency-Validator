@@ -1,6 +1,8 @@
-﻿using System.IO.Abstractions;
+﻿using System;
+using System.IO.Abstractions;
 using Autofac;
 using PackageDependencyValidator.FileParser;
+using PackageDependencyValidator.Properties;
 using PackageDependencyValidator.Validators;
 
 namespace PackageDependencyValidator
@@ -9,7 +11,7 @@ namespace PackageDependencyValidator
 	{
 		public static IContainer Container { get; set; }
 
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var builder = new ContainerBuilder();
 			builder.RegisterType<PackageDependenciesFileParser>().As<IPackageDependenciesFileParser>();
@@ -17,6 +19,22 @@ namespace PackageDependencyValidator
 			builder.RegisterType<FileSystem>().As<IFileSystem>();
 			builder.RegisterType<DependenciesValidator>().As<IDependenciesValidator>();
 			Container = builder.Build();
+
+			var fileName = args[0];
+			ParseFile(fileName);
+		}
+
+		public static void ParseFile(string fileName)
+		{
+			using (var scope = Container.BeginLifetimeScope())
+			{
+				var parser = scope.Resolve<IPackageDependenciesFileParser>();
+				var applicationPackageInformation = parser.Parse(fileName);
+
+				var applicationPackageValidator = scope.Resolve<IDependenciesValidator>();
+				var validationStatus = applicationPackageValidator.AreDependenciesValid(applicationPackageInformation) ? Resource.PassStatus : Resource.FailStatus;
+				Console.WriteLine(validationStatus);
+			}
 		}
 	}
 }

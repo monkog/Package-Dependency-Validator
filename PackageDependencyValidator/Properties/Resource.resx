@@ -125,6 +125,10 @@
     <value>Package version cannot be an empty string.</value>
     <comment>Displayed when the user passes an empty string as a package version.</comment>
   </data>
+  <data name="FailStatus" xml:space="preserve">
+    <value>FAIL</value>
+    <comment>Displayed in the console when the dependency validation is invalid for the provided data.</comment>
+  </data>
   <data name="InvalidPackageDescription" xml:space="preserve">
     <value>Invalid package description {0}.</value>
     <comment>Displayed when the package description is not in a `package,version` format.</comment>
@@ -136,5 +140,9 @@
   <data name="InvalidPackageVersion" xml:space="preserve">
     <value>Invalid package version: {0}. The value must be 1 or higher.</value>
     <comment>Displayed when the user passes a package version that is lower than 1.</comment>
+  </data>
+  <data name="PassStatus" xml:space="preserve">
+    <value>PASS</value>
+    <comment>Displayed in the console when the dependency validation is valid for the provided data.</comment>
   </data>
 </root>

@@ -79,6 +79,15 @@ namespace PackageDependencyValidator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FAIL.
+        /// </summary>
+        internal static string FailStatus {
+            get {
+                return ResourceManager.GetString("FailStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid package description {0}..
         /// </summary>
         internal static string InvalidPackageDescription {
@@ -102,6 +111,15 @@ namespace PackageDependencyValidator.Properties {
         internal static string InvalidPackageVersion {
             get {
                 return ResourceManager.GetString("InvalidPackageVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PASS.
+        /// </summary>
+        internal static string PassStatus {
+            get {
+                return ResourceManager.GetString("PassStatus", resourceCulture);
             }
         }
     }
