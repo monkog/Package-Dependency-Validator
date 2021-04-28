@@ -99,5 +99,23 @@ namespace PackageDependencyValidatorTests.FileParser
 			Assert.AreEqual(packageDependencies.Package, result.Package);
 			CollectionAssert.AreEquivalent(packageDependencies.Dependencies.ToList(), result.Dependencies.ToList());
 		}
+
+		[TestMethod]
+		public void ParseDependenciesInformation_MultipleDependencies_DataParsed()
+		{
+			// Arrange
+			var package1 = new PackageDetails("p", "1");
+			var package2 = new PackageDetails("x", "2");
+			var package3 = new PackageDetails("z", "2");
+			var packageDependencies = new PackageDependency(package1, package2, package3);
+
+			// Act
+			var result = _unitUnderTest.ParseDependenciesInformation($"{package1.Name},{package1.Version},{package2.Name},{package2.Version},{package3.Name},{package3.Version}");
+
+			// Assert
+			Assert.IsNotNull(result);
+			Assert.AreEqual(packageDependencies.Package, result.Package);
+			CollectionAssert.AreEquivalent(packageDependencies.Dependencies.ToList(), result.Dependencies.ToList());
+		}
 	}
 }
