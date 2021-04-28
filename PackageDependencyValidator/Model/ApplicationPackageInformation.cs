@@ -6,7 +6,7 @@ namespace PackageDependencyValidator.Model
 	/// <summary>
 	/// System package dependencies model.
 	/// </summary>
-	internal class ApplicationPackageInformation
+	public class ApplicationPackageInformation
 	{
 		/// <summary>
 		/// Collection of packages to install.
