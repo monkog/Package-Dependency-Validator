@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageDependencyValidator"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageDependencyValidatorTests", "PackageDependencyValidatorTests\PackageDependencyValidatorTests.csproj", "{13FF367E-5ED6-4EE5-9646-CDE368D6611E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageDependencyValidatorIntegrationTests", "PackageDependencyValidatorIntegrationTests\PackageDependencyValidatorIntegrationTests.csproj", "{91EF2F29-CFE4-4ED2-B773-BC97A2ABE4A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{13FF367E-5ED6-4EE5-9646-CDE368D6611E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13FF367E-5ED6-4EE5-9646-CDE368D6611E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13FF367E-5ED6-4EE5-9646-CDE368D6611E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91EF2F29-CFE4-4ED2-B773-BC97A2ABE4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EF2F29-CFE4-4ED2-B773-BC97A2ABE4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EF2F29-CFE4-4ED2-B773-BC97A2ABE4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EF2F29-CFE4-4ED2-B773-BC97A2ABE4A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

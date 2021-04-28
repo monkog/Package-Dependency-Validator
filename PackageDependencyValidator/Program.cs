@@ -14,10 +14,7 @@ namespace PackageDependencyValidator
 		public static void Main(string[] args)
 		{
 			var builder = new ContainerBuilder();
-			builder.RegisterType<PackageDependenciesFileParser>().As<IPackageDependenciesFileParser>();
-			builder.RegisterType<PackageInformationParser>().As<IPackageInformationParser>();
-			builder.RegisterType<FileSystem>().As<IFileSystem>();
-			builder.RegisterType<DependenciesValidator>().As<IDependenciesValidator>();
+			RegisterDependencies(builder);
 			Container = builder.Build();
 
 			var fileName = args[0];
@@ -35,6 +32,14 @@ namespace PackageDependencyValidator
 				var validationStatus = applicationPackageValidator.AreDependenciesValid(applicationPackageInformation) ? Resource.PassStatus : Resource.FailStatus;
 				Console.WriteLine(validationStatus);
 			}
+		}
+
+		private static void RegisterDependencies(ContainerBuilder builder)
+		{
+			builder.RegisterType<PackageDependenciesFileParser>().As<IPackageDependenciesFileParser>();
+			builder.RegisterType<PackageInformationParser>().As<IPackageInformationParser>();
+			builder.RegisterType<FileSystem>().As<IFileSystem>();
+			builder.RegisterType<DependenciesValidator>().As<IDependenciesValidator>();
 		}
 	}
 }

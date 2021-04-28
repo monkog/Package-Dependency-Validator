@@ -1,12 +1,12 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("PackageDependencyValidatorTests")]
-[assembly: AssemblyProduct("PackageDependencyValidatorTests")]
+[assembly: AssemblyTitle("PackageDependencyValidatorIntegrationTests")]
+[assembly: AssemblyProduct("PackageDependencyValidatorIntegrationTests")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 
 [assembly: ComVisible(false)]
-[assembly: Guid("13ff367e-5ed6-4ee5-9646-cde368d6611e")]
+[assembly: Guid("91ef2f29-cfe4-4ed2-b773-bc97a2abe4a6")]
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
