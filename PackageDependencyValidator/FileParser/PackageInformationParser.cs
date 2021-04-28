@@ -31,7 +31,7 @@ namespace PackageDependencyValidator.FileParser
 		public PackageDependency ParseDependenciesInformation(string value)
 		{
 			var packages = ParsePackageInformationLine(value, false).ToArray();
-			return new PackageDependency(packages[0], packages[1]);
+			return new PackageDependency(packages[0], packages.Skip(1).ToArray());
 		}
 
 		private static IEnumerable<PackageDetails> ParsePackageInformationLine(string value, bool isSinglePackage)
