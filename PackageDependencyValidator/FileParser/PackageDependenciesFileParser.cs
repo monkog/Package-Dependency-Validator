@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions;
+using System.Linq;
 using PackageDependencyValidator.Model;
 
 namespace PackageDependencyValidator.FileParser
@@ -44,6 +45,11 @@ namespace PackageDependencyValidator.FileParser
 					}
 
 					var dependenciesCountLine = reader.ReadLine();
+					if (dependenciesCountLine == null)
+					{
+						return new ApplicationPackageInformation(packagesToInstall, new Dictionary<PackageDetails, IList<PackageDetails>>());
+					}
+
 					var dependenciesCount = _packageInformationParser.ParsePackageCount(dependenciesCountLine);
 					var packageDependencies = new Dictionary<PackageDetails, IList<PackageDetails>>();
 

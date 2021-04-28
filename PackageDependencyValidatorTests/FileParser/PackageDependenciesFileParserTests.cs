@@ -91,5 +91,22 @@ namespace PackageDependencyValidatorTests.FileParser
 			Assert.AreEqual(package, result.PackageDependencies.Single().Key);
 			Assert.AreEqual(dependency, result.PackageDependencies.Single().Value.Single());
 		}
+
+		[TestMethod]
+		public void Parse_NoDependencies_OnlyPackages()
+		{
+			// Arrange
+			var package = new PackageDetails("package", "1");
+
+			_packageInformationParser.Stub(p => p.ParsePackageCount(Arg<string>.Is.Anything)).Return(1).Repeat.Once();
+			_packageInformationParser.Stub(p => p.ParsePackageInformation(Arg<string>.Is.Anything)).Return(package);
+
+			// Act
+			var result = _unitUnderTest.Parse(FilePath);
+
+			// Assert
+			Assert.AreEqual(package, result.PackagesToInstall.Single());
+			Assert.AreEqual(0, result.PackageDependencies.Count);
+		}
 	}
 }
