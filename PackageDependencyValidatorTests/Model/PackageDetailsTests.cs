@@ -116,6 +116,50 @@ namespace PackageDependencyValidatorTests.Model
 			Assert.IsTrue(result);
 		}
 
+		[TestMethod]
+		public void GetHashCode_SameObject_SameHashCode()
+		{
+			// Arrange
+			var unitUnderTest = new PackageDetails(ValidName, ValidVersion);
+
+			// Act
+			var hash = unitUnderTest.GetHashCode();
+			var sameHash = unitUnderTest.GetHashCode();
+
+			// Assert
+			Assert.AreEqual(hash, sameHash);
+		}
+
+		[TestMethod]
+		public void GetHashCode_DifferentObjectsSameValues_SameHashCode()
+		{
+			// Arrange
+			var unitUnderTest = new PackageDetails(ValidName, ValidVersion);
+			var other = new PackageDetails(ValidName, ValidVersion);
+
+			// Act
+			var hash = unitUnderTest.GetHashCode();
+			var otherHash = other.GetHashCode();
+
+			// Assert
+			Assert.AreEqual(hash, otherHash);
+		}
+
+		[TestMethod]
+		public void GetHashCode_DifferentObjectsValues_DifferentHashCode()
+		{
+			// Arrange
+			var unitUnderTest = new PackageDetails(ValidName, ValidVersion);
+			var other = new PackageDetails("package-1", ValidVersion);
+
+			// Act
+			var hash = unitUnderTest.GetHashCode();
+			var otherHash = other.GetHashCode();
+
+			// Assert
+			Assert.AreNotEqual(hash, otherHash);
+		}
+
 		private class OtherPackageDetails
 		{
 			private string Name { get; }

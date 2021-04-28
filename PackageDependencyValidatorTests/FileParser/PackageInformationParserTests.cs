@@ -97,7 +97,7 @@ namespace PackageDependencyValidatorTests.FileParser
 			// Assert
 			Assert.IsNotNull(result);
 			Assert.AreEqual(packageDependencies.Package, result.Package);
-			Assert.AreEqual(packageDependencies.Dependencies.Single(), result.Dependencies.Single());
+			CollectionAssert.AreEquivalent(packageDependencies.Dependencies.ToList(), result.Dependencies.ToList());
 		}
 	}
 }
