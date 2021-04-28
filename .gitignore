@@ -1,0 +1,9 @@
+# Visual Studio files & binaries
+.vs/
+bin/
+obj/
+*.suo
+packages/
+
+*.DotSettings.user
+*.coverage
