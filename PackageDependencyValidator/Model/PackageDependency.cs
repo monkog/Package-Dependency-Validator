@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PackageDependencyValidator.Model
 {
@@ -13,14 +14,14 @@ namespace PackageDependencyValidator.Model
 		public PackageDetails Package { get; }
 
 		/// <summary>
-		/// Definition of a package dependency.
+		/// Definition of a package dependencies.
 		/// </summary>
-		public PackageDetails Dependency { get; }
+		public IList<PackageDetails> Dependencies { get; }
 
-		public PackageDependency(PackageDetails package, PackageDetails dependency)
+		public PackageDependency(PackageDetails package, params PackageDetails[] dependencies)
 		{
 			Package = package?? throw new ArgumentNullException(nameof(package));
-			Dependency = dependency?? throw new ArgumentNullException(nameof(dependency));
+			Dependencies = dependencies?? throw new ArgumentNullException(nameof(dependencies));
 		}
 	}
 }

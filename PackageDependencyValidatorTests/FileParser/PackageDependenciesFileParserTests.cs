@@ -69,5 +69,27 @@ namespace PackageDependencyValidatorTests.FileParser
 			Assert.AreEqual(package, result.PackageDependencies.Single().Key);
 			Assert.AreEqual(dependency, result.PackageDependencies.Single().Value.Single());
 		}
+
+		[TestMethod]
+		public void Parse_DuplicatedPackageAndDependency_DistinctPackageAndDependency()
+		{
+			// Arrange
+			var package = new PackageDetails("package", "1");
+			var dependency = new PackageDetails("dependency", "1");
+			var packageDependency = new PackageDependency(package, dependency);
+
+			_packageInformationParser.Stub(p => p.ParsePackageCount(Arg<string>.Is.Anything)).Return(2);
+			_packageInformationParser.Stub(p => p.ParsePackageInformation(Arg<string>.Is.Anything)).Return(package);
+			_packageInformationParser.Stub(p => p.ParseDependenciesInformation(Arg<string>.Is.Anything)).Return(packageDependency);
+
+			// Act
+			var result = _unitUnderTest.Parse(FilePath);
+
+			// Assert
+			Assert.IsNotNull(result);
+			Assert.AreEqual(package, result.PackagesToInstall.Single());
+			Assert.AreEqual(package, result.PackageDependencies.Single().Key);
+			Assert.AreEqual(dependency, result.PackageDependencies.Single().Value.Single());
+		}
 	}
 }

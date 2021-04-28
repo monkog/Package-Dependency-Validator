@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PackageDependencyValidator.FileParser;
 using PackageDependencyValidator.Model;
@@ -74,7 +75,7 @@ namespace PackageDependencyValidatorTests.FileParser
 		[DataRow("p")]
 		[DataRow("p,1")]
 		[DataRow("p,1,p")]
-		[DataRow("p,1,p,2,p,3")]
+		[DataRow("p,1,p,2,p")]
 		[ExpectedException(typeof(FormatException))]
 		public void ParseDependenciesInformation_WrongFormat_FormatException(string value)
 		{
@@ -96,7 +97,7 @@ namespace PackageDependencyValidatorTests.FileParser
 			// Assert
 			Assert.IsNotNull(result);
 			Assert.AreEqual(packageDependencies.Package, result.Package);
-			Assert.AreEqual(packageDependencies.Dependency, result.Dependency);
+			Assert.AreEqual(packageDependencies.Dependencies.Single(), result.Dependencies.Single());
 		}
 	}
 }

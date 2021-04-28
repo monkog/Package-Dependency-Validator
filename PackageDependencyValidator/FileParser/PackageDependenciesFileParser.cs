@@ -35,6 +35,11 @@ namespace PackageDependencyValidator.FileParser
 					{
 						var packageLine = reader.ReadLine();
 						var package = _packageInformationParser.ParsePackageInformation(packageLine);
+						if (packagesToInstall.Contains(package))
+						{
+							continue;
+						}
+
 						packagesToInstall.Add(package);
 					}
 
@@ -45,7 +50,7 @@ namespace PackageDependencyValidator.FileParser
 					{
 						var dependenciesLine = reader.ReadLine();
 						var dependencies = _packageInformationParser.ParseDependenciesInformation(dependenciesLine);
-						RegisterPackageDependency(packageDependencies, dependencies.Package, dependencies.Dependency);
+						RegisterPackageDependency(packageDependencies, dependencies.Package, dependencies.Dependencies);
 					}
 
 					return new ApplicationPackageInformation(packagesToInstall, packageDependencies);
@@ -53,14 +58,22 @@ namespace PackageDependencyValidator.FileParser
 			}
 		}
 
-		private static void RegisterPackageDependency(IDictionary<PackageDetails, IList<PackageDetails>> packageDependencies, PackageDetails package, PackageDetails dependency)
+		private static void RegisterPackageDependency(IDictionary<PackageDetails, IList<PackageDetails>> packageDependencies, PackageDetails package, IList<PackageDetails> dependencies)
 		{
 			if (!packageDependencies.ContainsKey(package))
 			{
 				packageDependencies.Add(package, new List<PackageDetails>());
 			}
 
-			packageDependencies[package].Add(dependency);
+			foreach (var dependency in dependencies)
+			{
+				if (packageDependencies[package].Contains(dependency))
+				{
+					continue;
+				}
+
+				packageDependencies[package].Add(dependency);
+			}
 		}
 	}
 }

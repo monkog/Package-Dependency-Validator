@@ -55,8 +55,7 @@ namespace PackageDependencyValidator.FileParser
 
 		private static bool HasValidNumberOfElements(IReadOnlyCollection<string> collection, bool isSinglePackage)
 		{
-			var expectedElementCount = isSinglePackage ? 2 : 4;
-			return collection.Count == expectedElementCount;
+			return isSinglePackage ? collection.Count == 2 : collection.Count > 2 && collection.Count % 2 == 0;
 		}
 	}
 }

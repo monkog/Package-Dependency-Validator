@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PackageDependencyValidator.Model;
 
@@ -43,7 +44,7 @@ namespace PackageDependencyValidatorTests.Model
 			// Assert
 			Assert.IsNotNull(result);
 			Assert.AreEqual(_package, result.Package);
-			Assert.AreEqual(_dependency, result.Dependency);
+			CollectionAssert.AreEquivalent(new[] { _dependency }, result.Dependencies.ToList());
 		}
 	}
 }
