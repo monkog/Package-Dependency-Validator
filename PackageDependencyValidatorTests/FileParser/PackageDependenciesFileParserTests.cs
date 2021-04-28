@@ -19,7 +19,7 @@ namespace PackageDependencyValidatorTests.FileParser
 
 		private PackageDependenciesFileParser _unitUnderTest;
 		private const string FilePath = "filepath";
-		private const string FileContent = "content";
+		private const string FileContent = "1\nP1,42\n1\nP1,42,P2,Beta-1";
 
 		[TestInitialize]
 		public void Initialize()
