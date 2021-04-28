@@ -61,7 +61,7 @@ namespace PackageDependencyValidatorTests.Validators
 		}
 
 		[TestMethod]
-		public void AreDependenciesValid_PackageSameAsItsDependency_False()
+		public void AreDependenciesValid_PackageSameAsItsDependency_True()
 		{
 			// Arrange
 			var dependencies = new Dictionary<PackageDetails, IList<PackageDetails>> { { _package, new List<PackageDetails> { _package } } };
@@ -71,7 +71,7 @@ namespace PackageDependencyValidatorTests.Validators
 			var result = _unitUnderTest.AreDependenciesValid(packageInformation);
 
 			// Assert
-			Assert.IsFalse(result);
+			Assert.IsTrue(result);
 		}
 
 		[TestMethod]

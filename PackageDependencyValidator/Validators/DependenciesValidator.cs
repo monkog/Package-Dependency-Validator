@@ -36,11 +36,6 @@ namespace PackageDependencyValidator.Validators
 				var dependencies = packageInformation.PackageDependencies[packageToInstall];
 				foreach (var dependency in dependencies)
 				{
-					if (packageToInstall.Equals(dependency))
-					{
-						return false;
-					}
-
 					if (packagesToInstall.Contains(dependency))
 					{
 						continue;
