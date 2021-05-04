@@ -5,9 +5,9 @@ using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using PackageDependencyValidator.FileParser;
 using PackageDependencyValidator.Model;
-using Rhino.Mocks;
 
 namespace PackageDependencyValidatorTests.FileParser
 {
@@ -15,7 +15,7 @@ namespace PackageDependencyValidatorTests.FileParser
 	public class PackageDependenciesFileParserTests
 	{
 		private IFileSystem _fileSystem;
-		private IPackageInformationParser _packageInformationParser;
+		private Mock<IPackageInformationParser> _packageInformationParser;
 
 		private PackageDependenciesFileParser _unitUnderTest;
 		private const string FilePath = "filepath";
@@ -27,9 +27,9 @@ namespace PackageDependencyValidatorTests.FileParser
 			var fileData = new MockFileData(FileContent);
 			var files = new Dictionary<string, MockFileData> { { FilePath, fileData } };
 			_fileSystem = new MockFileSystem(files);
-			_packageInformationParser = MockRepository.GenerateMock<IPackageInformationParser>();
+			_packageInformationParser = new Mock<IPackageInformationParser>();
 
-			_unitUnderTest = new PackageDependenciesFileParser(_fileSystem, _packageInformationParser);
+			_unitUnderTest = new PackageDependenciesFileParser(_fileSystem, _packageInformationParser.Object);
 		}
 
 		[TestMethod]
@@ -56,9 +56,9 @@ namespace PackageDependencyValidatorTests.FileParser
 			var dependency = new PackageDetails("dependency", "1");
 			var packageDependency = new PackageDependency(package, dependency);
 
-			_packageInformationParser.Stub(p => p.ParsePackageCount(Arg<string>.Is.Anything)).Return(1);
-			_packageInformationParser.Stub(p => p.ParsePackageInformation(Arg<string>.Is.Anything)).Return(package);
-			_packageInformationParser.Stub(p => p.ParseDependenciesInformation(Arg<string>.Is.Anything)).Return(packageDependency);
+			_packageInformationParser.Setup(p => p.ParsePackageCount(It.IsAny<string>())).Returns(1);
+			_packageInformationParser.Setup(p => p.ParsePackageInformation(It.IsAny<string>())).Returns(package);
+			_packageInformationParser.Setup(p => p.ParseDependenciesInformation(It.IsAny<string>())).Returns(packageDependency);
 
 			// Act
 			var result = _unitUnderTest.Parse(FilePath);
@@ -78,9 +78,9 @@ namespace PackageDependencyValidatorTests.FileParser
 			var dependency = new PackageDetails("dependency", "1");
 			var packageDependency = new PackageDependency(package, dependency);
 
-			_packageInformationParser.Stub(p => p.ParsePackageCount(Arg<string>.Is.Anything)).Return(2);
-			_packageInformationParser.Stub(p => p.ParsePackageInformation(Arg<string>.Is.Anything)).Return(package);
-			_packageInformationParser.Stub(p => p.ParseDependenciesInformation(Arg<string>.Is.Anything)).Return(packageDependency);
+			_packageInformationParser.Setup(p => p.ParsePackageCount(It.IsAny<string>())).Returns(2);
+			_packageInformationParser.Setup(p => p.ParsePackageInformation(It.IsAny<string>())).Returns(package);
+			_packageInformationParser.Setup(p => p.ParseDependenciesInformation(It.IsAny<string>())).Returns(packageDependency);
 
 			// Act
 			var result = _unitUnderTest.Parse(FilePath);
@@ -98,8 +98,8 @@ namespace PackageDependencyValidatorTests.FileParser
 			// Arrange
 			var package = new PackageDetails("package", "1");
 
-			_packageInformationParser.Stub(p => p.ParsePackageCount(Arg<string>.Is.Anything)).Return(1).Repeat.Once();
-			_packageInformationParser.Stub(p => p.ParsePackageInformation(Arg<string>.Is.Anything)).Return(package);
+			_packageInformationParser.SetupSequence(p => p.ParsePackageCount(It.IsAny<string>())).Returns(1).Returns(0);
+			_packageInformationParser.Setup(p => p.ParsePackageInformation(It.IsAny<string>())).Returns(package);
 
 			// Act
 			var result = _unitUnderTest.Parse(FilePath);
